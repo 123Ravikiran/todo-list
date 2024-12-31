@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>To-Do List</title>
+<link rel="stylesheet" href="style.css">
+<style>
+    
+body{
+
+    font-family:'Times New Roman', Times, serif;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background:aquamarine;
+}
+#container{
+    width:30%;
+    margin: 0 auto;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.5);
+    padding: 50px;
+    color:aliceblue;
+    background:radial-gradient(#353a4a,#000);
+
+}
+#container h1{
+    text-transform: uppercase;
+    margin-bottom: 5%;
+
+}
+#single-task{
+    width: 300px;
+    padding:15px;
+
+}
+button{
+    background: linear-gradient(45deg,#dc1599,#f99369);
+    border:none;
+    color: #fff;
+    padding:13px 18px;
+    font-size: 15px;
+}
+.task{
+    margin-bottom: 5px;
+    margin-top: 15px;
+    background: #fff;
+    color: #000;
+    list-style: none;
+    padding: 0 15px;
+    line-height: 35px;
+}
+.task input[type="checkbox"]{
+    display: none;
+}
+.task.delete{
+    color:red;
+    cursor: pointer;
+    font-size: 20px;
+    margin: 0px;
+    float: right;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>My To-Do List</h1>
+
+<input type="text" id="taskInput" placeholder="Enter task...">
+<button id="addTaskBtn">Add Task</button>
+
+<ul id="taskList">
+</ul>
+</div>
+<script>
+    // Function to add task
+    function addTask() {
+        var input = document.getElementById("taskInput");
+        var task = input.value.trim();
+        if (task === "") {
+            alert("Please enter a task!");
+            return;
+        }
+
+        var listItem = createTaskElement(task);
+        document.getElementById("taskList").appendChild(listItem);
+
+        input.value = "";
+    }
+
+    // Function to create task element
+    function createTaskElement(taskText) {
+        var listItem = document.createElement("li");
+        listItem.textContent = taskText;
+
+        var deleteButton = document.createElement("button");
+        deleteButton.textContent = "Delete";
+        deleteButton.onclick = function() {
+            listItem.remove();
+        };
+
+        listItem.appendChild(deleteButton);
+        return listItem;
+    }
+
+    // Add task button event listener
+    document.getElementById("addTaskBtn").addEventListener("click", addTask);
+</script>
+
+</body>
+</html>
